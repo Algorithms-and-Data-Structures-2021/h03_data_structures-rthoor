@@ -50,9 +50,8 @@ void ArrayStack::Pop() {
 
 void ArrayStack::Clear() {
   // TODO: напишите здесь свой код ...
-  while(size_ != 0){
-    Pop();
-  }
+  std::fill(data_, data_+size_, Element::UNDEFINED);
+  size_ = 0;
 }
 
 void ArrayStack::resize(int new_capacity) {

@@ -6,10 +6,28 @@ namespace itis {
 
 void LinkedDequeue::Enqueue(Element e) {
   // TODO: напишите здесь свой код ...
+  auto node = new DoublyNode(e, nullptr, back_);
+  if(size_ == 0){
+      front_ = node;
+  }
+  else{
+      back_->previous = node;
+  }
+  back_ = node;
+  size_++;
 }
 
 void LinkedDequeue::EnqueueFront(Element e) {
   // TODO: напишите здесь свой код ...
+    auto node = new DoublyNode(e, front_, nullptr);
+    if(size_ == 0){
+        back_ = node;
+    }
+    else{
+        front_->next = node;
+    }
+    front_ = node;
+    size_++;
 }
 
 void LinkedDequeue::Dequeue() {
@@ -18,6 +36,16 @@ void LinkedDequeue::Dequeue() {
   }
 
   // TODO: напишите здесь свой код ...
+  if(size_ == 1){
+      delete front_;
+      back_ = nullptr;
+      front_ = nullptr;
+  }
+  else{
+      front_ = front_->previous;
+      delete front_->next;
+  }
+  size_--;
 }
 
 void LinkedDequeue::DequeueBack() {
@@ -26,10 +54,23 @@ void LinkedDequeue::DequeueBack() {
   }
 
   // TODO: напишите здесь свой код ...
+    if(size_ == 1){
+        delete back_;
+        back_ = nullptr;
+        front_ = nullptr;
+    }
+    else{
+        back_ = back_->next;
+        delete back_->previous;
+    }
+    size_--;
 }
 
 void LinkedDequeue::Clear() {
   // TODO: напишите здесь свой код ...
+  while(size_ != 0){
+      DequeueBack();
+  }
 }
 
 // === РЕАЛИЗОВАНО ===
